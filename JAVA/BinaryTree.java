@@ -205,20 +205,16 @@ public class BinaryTree {
         
     }
     private static void mirrorTree(TreeNode root){
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        Queue<TreeNode> q0 = new LinkedList<>();
-
-        while(!q.isEmpty()){
-            TreeNode n= q.poll();
-            q0.add(n);
-            if(root.right!=null)
-                q.add(root.right);
-
-            if(root.left!=null){
-                q.add(root.left);
-            }
-        }
+       TreeNode n =mirror(root);
+       System.out.println("===============");
+       inOrderTraversal(n);
+    }
+    static TreeNode mirror(TreeNode root){
+        if(root ==null) return root;
+        TreeNode n = new TreeNode(root.data);
+        n.right = mirror(root.left);
+        n.left = mirror(root.right);
+         return n;
     }
     public static void main(String[] args) {
         root = new TreeNode(30);
@@ -226,22 +222,25 @@ public class BinaryTree {
         root.right = new TreeNode(10);
         root.left.left = new TreeNode(15);
         root.left.right = new TreeNode(70);
-         root.right.left = new TreeNode(30);
+         root.right.left = new TreeNode(50);
          root.right.right = new TreeNode(40);
      
        // insertNewNode(root,100); 
-
+      
        //doLevelOrderTraversal(root);//level order using recursion
        //levelOrderTraversalUsingQueue(root); //level order using Queue
       // System.out.println("preOrder");
       // preOrderTraversal(root);
       // System.out.println("inOrder");
-       //inOrderTraversal(root);
+      inOrderTraversal(root);
+        mirrorTree(root);
+     
       // System.out.println("PostOrder");
        //postOrderTraversal(root);
-       //levelOrderReverse(root);
+      // levelOrderReverse(root);
       // System.out.println(searchInBinaryTree(root,150));
       //System.out.println(findMaxHeightDepth(root));
+     
     }
 
 }
